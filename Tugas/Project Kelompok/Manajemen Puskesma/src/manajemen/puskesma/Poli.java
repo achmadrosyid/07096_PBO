@@ -11,25 +11,23 @@ package manajemen.puskesma;
  */
 public class Poli {
     String Nama;
-    int JumlahPegawai,JummlahPasien;
+    int JumlahPegawai,JumlahPasien;
 
-    public Poli(String Nama, int JumlahPegawai, int JummlahPasien) {
+    public Poli(String Nama, int JumlahPegawai, int JumlahPasien) {
         this.Nama = Nama;
         this.JumlahPegawai = JumlahPegawai;
-        this.JummlahPasien = JummlahPasien;
+        this.JumlahPasien = JumlahPasien;
     }
-
+    
     String getNama() {
-        return Nama;
+        return this.Nama;
     }
 
     int getJumlahPegawai() {
-        return JumlahPegawai;
+        return this.JumlahPegawai;
     }
 
-    int getJummlahPasien() {
-        return JummlahPasien;
+    int getJumlahPasien() {
+        return this.JumlahPasien;
     }
-    
-    
 }

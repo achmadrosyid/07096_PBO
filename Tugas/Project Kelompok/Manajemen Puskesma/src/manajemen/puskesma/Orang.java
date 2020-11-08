@@ -9,38 +9,48 @@ package manajemen.puskesma;
  *
  * @author Bariq Qushoyyi
  */
-public class Orang {
-    String Nama, Type, Alamat;
-    boolean JenisKelamin;
-    int NIK;
+import java.util.Date;
 
-    public Orang(String Nama, String Type, String Alamat, boolean JenisKelamin, int NIK) {
+public class Orang {
+    String Nama, Password, Alamat;
+    Date TanggalLahir;
+    int NIK, Type, JenisKelamin;
+
+    public Orang(int NIK, String Nama, String Password, Date TanggalLahir, int Type, String Alamat, int JenisKelamin) {
+        this.NIK = NIK;
         this.Nama = Nama;
+        this.Password = Password;
+        this.TanggalLahir = TanggalLahir;
         this.Type = Type;
         this.Alamat = Alamat;
         this.JenisKelamin = JenisKelamin;
-        this.NIK = NIK;
-    }
-
-    public String getNama() {
-        return Nama;
-    }
-
-    public String getType() {
-        return Type;
-    }
-
-    public String getAlamat() {
-        return Alamat;
-    }
-
-    public boolean isJenisKelamin() {
-        return JenisKelamin;
-    }
-
-    public int getNIK() {
-        return NIK;
     }
     
+    int getNik() {
+        return this.NIK;
+    }
+
+    String getNama() {
+        return this.Nama;
+    }
     
+    String getPassword() {
+        return this.Password;
+    }
+    
+    Date getDate() {
+        return this.TanggalLahir;
+    }
+
+    int getType() {
+        return this.Type;
+    }
+
+    String getAlamat() {
+        return this.Alamat;
+    }
+
+    int isJenisKelamin() {
+        return this.JenisKelamin;
+    }
 }
