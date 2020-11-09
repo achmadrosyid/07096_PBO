@@ -5,6 +5,8 @@
  */
 package manajemen.puskesma;
 
+import java.util.Date;
+
 /**
  *
  * @author Bariq Qushoyyi
@@ -13,7 +15,8 @@ package manajemen.puskesma;
 public class Dokter extends Orang {
     String Spesialis;
 
-    public Dokter(String Spesialis) {
+    public Dokter(String Spesialis, int NIK, String Nama, String Password, Date TanggalLahir, int Type, String Alamat, int JenisKelamin) {
+        super(NIK, Nama, Password, TanggalLahir, Type, Alamat, JenisKelamin);
         this.Spesialis = Spesialis;
     }
 
