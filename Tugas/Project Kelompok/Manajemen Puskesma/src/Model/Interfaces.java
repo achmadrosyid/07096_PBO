@@ -3,13 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package manajemen.puskesma;
+package Model;
 
 /**
  *
  * @author Bariq Qushoyyi
  */
-public class Type {
-    static String[] TypeUser = {"Dokter","Perawat","Pasien"};
-    static String[] Gender = {"Laki-Laki","Perempuan"};
+public interface Interfaces {
+
+    public void view();
+    public int cekData(int nik, String password);
 }

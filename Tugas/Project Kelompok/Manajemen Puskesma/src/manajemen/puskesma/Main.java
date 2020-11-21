@@ -5,44 +5,60 @@
  */
 package manajemen.puskesma;
 
-/**
- *
- * @author Bariq Qushoyyi
- */
+import Entity.*;
+import Model.*;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
 
 public class Main {
-    static ArrayList <Orang> datauser = new ArrayList();
+
+    private static DokterModel dataDokter = new DokterModel();
+    private static PasienModel dataPasien = new PasienModel();
+    private static DaftarpasienModel dataDaftarpasien = new DaftarpasienModel();
     static Scanner input = new Scanner(System.in);
+    static int cekDokter;
 
     public static void main(String[] args) {
-        System.out.println("Selamat Datang Di Aplikasi Sistem Informasi Manajemen Puskesmas");
-        int menu;
+        int loop = 0;
+        dataDokter();
         do {
-            System.out.println("Daftar Menu : ");
-            System.out.println("1. Register");
-            System.out.println("2. Login");
-            System.out.println("3. Exit");
-            System.out.print("Pilih Menu : ");
-            menu = input.nextInt();
-            switch(menu) {
-                case 1 :
+            int pilih = 0;
+            System.out.println("Selamat Datang Di Aplikasi Sistem Informasi Manajemen Puskesmas"
+                    + "\n 1. Login"
+                    + "\n 2. Register"
+                    + "\n 0. Stop"
+                    + "\n Masukkan Pilihan Anda : ");
+            pilih = input.nextInt();
+            if (pilih == 1) {
+                int pilLogin = 0;
+                System.out.print(" 1. Login Dokter"
+                        + "\n 2. Login Pasien"
+                        + "\n Pilih : ");
+                pilLogin = input.nextInt();
+                if (pilLogin == 1) {
+                    loginDokter();
+                } else {
+                    login();
+                }
+            } else if (pilih == 2) {
+                int pilRegister = 0;
+                System.out.print(" 1. Register Dokter"
+                        + "\n 2. Register Pasien"
+                        + "\n Pilih : ");
+                pilRegister = input.nextInt();
+                if (pilRegister == 1) {
+                    registerDokter();
+                } else {
                     register();
-                    break;
-                case 2 :
-                    System.out.print("NIK : ");
-                    int nik = input.nextInt();
-                    System.out.print("Password : ");
-                    String pass = input.next();
-                    login(nik,pass);
-                    break;
-                default :
-                    break;
+                }
+            } else if (pilih == 3) {
+                dataDokter.view();
+            } else {
+                break;
             }
-        } while(menu!=3);
+        } while (loop != 1);
     }
 
     static void register() {
@@ -52,40 +68,66 @@ public class Main {
         String nama = input.next();
         System.out.print("Input Password = ");
         String pass = input.next();
+        System.out.print("Input Alamat = ");
+        String alamat = input.next();
+        System.out.print("Jenis Kelamin = ");
+        String jeniskelamin = input.next();
         System.out.print("Input Tanggal Lahir (dd/mm/yyyy) = ");
         Date tanggal = new Date(input.next());
-        for(int i=0;i<Type.TypeUser.length;i++) {
-            System.out.println(i+". "+Type.TypeUser[i]);
-        }
-        System.out.print("Type = ");
-        int type = input.nextInt();
-        System.out.print("Alamat = ");
-        String alamat = input.next();
-        for(int i=0;i<Type.Gender.length;i++) {
-            System.out.println(i+". "+Type.Gender[i]);
-        }
-        System.out.print("Jenis Kelamin = ");
-        int jenisKelamin = input.nextInt();
-        datauser.add(new Orang(nik,nama,pass,tanggal,type,alamat,jenisKelamin));
+        System.out.print("Sakit Apa = ");
+        String penyakit = input.next();
+        dataPasien.insertPasien(new PasienEntity(penyakit, nama, pass, alamat, jeniskelamin, tanggal, nik));
     }
 
-    static void login(int nik, String password) {
-        for(int i=0;i<datauser.size();i++) {
-            if(nik == datauser.get(i).getNik() && password.equals(datauser.get(i).getPassword())) {
-                System.out.println("NIK : "+datauser.get(i).getNik());
-                System.out.println("Nama : "+datauser.get(i).getNama());
-                System.out.println("Tanggal Lahir = "+new SimpleDateFormat("dd-MM-yyyy").format(datauser.get(i).getDate()));
-                System.out.println("Alamat : "+datauser.get(i).getAlamat());
-                int gender = datauser.get(i).isJenisKelamin();
-                if(gender == 0) System.out.println("Jenis Kelamin : Laki-Laki");
-                else System.out.println("Jenis Kelamin : Perempuan");
-                int dataType = datauser.get(i).getType();
-                if(dataType == 0) System.out.println("Type User : Dokter");
-                else if(dataType == 1) System.out.println("Type User : Perawat");
-                else System.out.println("Type User : Pasien");
-            } else {
-                System.out.println("Username atau Password salah");
-            }
+    static void login() {
+        System.out.print("NIK : ");
+        int nik = input.nextInt();
+        System.out.print("Password : ");
+        String password = input.next();
+        cekDokter = dataPasien.cekData(nik, password);
+        System.out.println("Selamat Datang " + dataPasien.getPasienArrayList(cekDokter).getNama());
+        dataPasien.view();
+//        int cekpraktikum = dataDaftarpasien.cekData(nik, password);
+//        System.out.println("Nama = " + dataDaftarpasien.showDaftarpasien(cekDokter).getPasien().getNama());
+//        System.out.println("NIK = " + dataDaftarpasien.showDaftarpasien(cekDokter).getPasien().getNIK());
+//        System.out.println("Alamat = " + dataDaftarpasien.showDaftarpasien(cekDokter).getPasien().getAlamat());
+            //System.out.println("Praktikum = " + PraktikumEntity07171.nama[dataDaftarpasien.showDataDokter(cekPraktikan).getIndexPrak()]);
+
+    }
+
+    static void loginDokter() {
+        System.out.print("NIK : ");
+        int nik = input.nextInt();
+        System.out.print("Password : ");
+        String password = input.next();
+        cekDokter = dataDokter.cekData(nik, password);
+        System.out.println("Selamat Datang " + dataDokter.showDataDokter(cekDokter).getNama());
+        dataDokter.view();
+    }
+
+    static void dataDokter() {
+    }
+
+    static void registerDokter() {
+        System.out.print("Input NIK = ");
+        int nik = input.nextInt();
+        System.out.print("Input Nama = ");
+        String nama = input.next();
+        System.out.print("Input Password = ");
+        String pass = input.next();
+        System.out.print("Input Alamat = ");
+        String alamat = input.next();
+        System.out.print("Jenis Kelamin = ");
+        String jeniskelamin = input.next();
+        System.out.print("Input Tanggal Lahir (dd/mm/yyyy) = ");
+        Date tanggal = new Date(input.next());
+        System.out.print("Spesialis = ");
+        String spesialis = input.next();
+        for (int i = 0; i < PoliEntity.namaPoli.length; i++) {
+            System.out.println(i + ". " + PoliEntity.namaPoli[i]);
         }
+        System.out.print("Pilih Poli = ");
+        int indexPoli = input.nextInt();
+        dataDokter.insertDokter(new DokterEntity(spesialis, nama, pass, alamat, jeniskelamin, tanggal, nik, indexPoli));
     }
 }
