@@ -13,8 +13,8 @@ import java.util.Date;
  */
 public class DokterEntity extends OrangEntity {
 
-    String Spesialis;
-    int IndexPoli;
+    private String Spesialis;
+    private int IndexPoli;
 
     public DokterEntity(String Spesialis, String Nama, String Password, String Alamat, String JenisKelamin, Date TanggalLahir, int NIK, int IndexPoli) {
         super(Nama, Password, Alamat, JenisKelamin, TanggalLahir, NIK);

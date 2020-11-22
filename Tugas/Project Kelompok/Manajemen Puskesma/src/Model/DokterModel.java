@@ -39,8 +39,8 @@ public class DokterModel implements Interfaces {
     @Override
     public int cekData(int nik, String password) {
         int loop = 0;
-        for (DokterEntity aslabEntity07171 : DokterArrayList) {
-            if (aslabEntity07171.getNIK() == nik && aslabEntity07171.getPassword().equals(password)) {
+        for (DokterEntity dokterEntity : DokterArrayList) {
+            if (dokterEntity.getNIK() == nik && dokterEntity.getPassword().equals(password)) {
                 break;
             } else {
                 loop++;

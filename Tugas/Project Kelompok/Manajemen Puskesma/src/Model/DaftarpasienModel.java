@@ -20,7 +20,7 @@ public class DaftarpasienModel implements Interfaces {
         DaftarpasienArrayList = new ArrayList<DaftarpasienEntity>();
     }
 
-    public void insertDataDaftarprak(DaftarpasienEntity daftarPasien) {
+    public void insertDataDaftarpasien(DaftarpasienEntity daftarPasien) {
         DaftarpasienArrayList.add(daftarPasien);
     }
 

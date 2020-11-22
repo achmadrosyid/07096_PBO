@@ -12,5 +12,5 @@ package Entity;
 public class PoliEntity {
 
     public static String namaPoli[] = {"GIGI", "UMUM", "ANAK"};
-    int maxDaftar[] = {5, 5, 5};
+    public int maxDaftar[] = {5, 5, 5};
 }

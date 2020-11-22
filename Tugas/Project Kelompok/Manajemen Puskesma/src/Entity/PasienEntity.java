@@ -13,7 +13,7 @@ import java.util.Date;
  */
 public class PasienEntity extends OrangEntity {
 
-    String Penyakit;
+    private String Penyakit;
 
     public PasienEntity(String Penyakit, String Nama, String Password, String Alamat, String JenisKelamin, Date TanggalLahir, int NIK) {
         super(Nama, Password, Alamat, JenisKelamin, TanggalLahir, NIK);

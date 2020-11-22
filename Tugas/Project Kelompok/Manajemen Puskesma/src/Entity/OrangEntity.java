@@ -13,9 +13,9 @@ import java.util.Date;
  */
 public abstract class OrangEntity {
 
-    String Nama, Password, Alamat, JenisKelamin;
-    Date TanggalLahir;
-    int NIK;
+    protected String Nama, Password, Alamat, JenisKelamin;
+    protected Date TanggalLahir;
+    protected int NIK;
 
     public OrangEntity(String Nama, String Password, String Alamat, String JenisKelamin, Date TanggalLahir, int NIK) {
         this.Nama = Nama;
@@ -73,6 +73,4 @@ public abstract class OrangEntity {
     public void setNIK(int NIK) {
         this.NIK = NIK;
     }
-    
-    
 }
