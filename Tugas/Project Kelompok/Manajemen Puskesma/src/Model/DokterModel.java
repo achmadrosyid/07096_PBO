@@ -24,11 +24,15 @@ public class DokterModel implements Interfaces {
     @Override
     public void view() {
         for (DokterEntity dokter : DokterArrayList) {
+            System.out.println("========================================================");
             System.out.println("NIK : "+dokter.getNIK());
             System.out.println("NAMA : "+dokter.getNama());
             System.out.println("Alamat : "+dokter.getAlamat());
             System.out.println("Jenis Kelamin : "+dokter.getJenisKelamin());
-            System.out.println("Tanggal Lahir : "+new SimpleDateFormat("dd-mm-yyyy").format(dokter.getTanggalLahir()));
+            System.out.println("Tanggal Lahir : "+new SimpleDateFormat("dd-MM-yyyy").format(dokter.getTanggalLahir()));
+            System.out.println("Spesialis : "+dokter.getSpesialis());
+            System.out.println("========================================================");
+            System.out.println();
         }
     }
 

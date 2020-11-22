@@ -22,14 +22,13 @@ public class Main {
 
     public static void main(String[] args) {
         int loop = 0;
-        dataDokter();
         do {
             int pilih = 0;
             System.out.println("Selamat Datang Di Aplikasi Sistem Informasi Manajemen Puskesmas"
                     + "\n 1. Login"
                     + "\n 2. Register"
-                    + "\n 0. Stop"
-                    + "\n Masukkan Pilihan Anda : ");
+                    + "\n 0. Stop");
+            System.out.print("Masukkan Pilihan Anda : ");
             pilih = input.nextInt();
             if (pilih == 1) {
                 int pilLogin = 0;
@@ -87,12 +86,6 @@ public class Main {
         cekDokter = dataPasien.cekData(nik, password);
         System.out.println("Selamat Datang " + dataPasien.getPasienArrayList(cekDokter).getNama());
         dataPasien.view();
-//        int cekpraktikum = dataDaftarpasien.cekData(nik, password);
-//        System.out.println("Nama = " + dataDaftarpasien.showDaftarpasien(cekDokter).getPasien().getNama());
-//        System.out.println("NIK = " + dataDaftarpasien.showDaftarpasien(cekDokter).getPasien().getNIK());
-//        System.out.println("Alamat = " + dataDaftarpasien.showDaftarpasien(cekDokter).getPasien().getAlamat());
-            //System.out.println("Praktikum = " + PraktikumEntity07171.nama[dataDaftarpasien.showDataDokter(cekPraktikan).getIndexPrak()]);
-
     }
 
     static void loginDokter() {
@@ -103,9 +96,6 @@ public class Main {
         cekDokter = dataDokter.cekData(nik, password);
         System.out.println("Selamat Datang " + dataDokter.showDataDokter(cekDokter).getNama());
         dataDokter.view();
-    }
-
-    static void dataDokter() {
     }
 
     static void registerDokter() {

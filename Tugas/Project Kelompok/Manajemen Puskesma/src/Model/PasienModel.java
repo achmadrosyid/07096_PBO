@@ -7,6 +7,7 @@ package Model;
 
 import java.util.ArrayList;
 import Entity.PasienEntity;
+import java.text.SimpleDateFormat;
 
 public class PasienModel implements Interfaces {
     
@@ -23,13 +24,14 @@ public class PasienModel implements Interfaces {
     @Override
     public void view() {
         for (PasienEntity pasien : pasienArrayList) {
-            System.out.println("===============================================================");
+            System.out.println("========================================================");
             System.out.println(" NIK : " + pasien.getNIK()
                     + "\n Nama : " + pasien.getNama()
-                    + "\n Password : " + pasien.getPassword()
                     + "\n Alamat : " + pasien.getAlamat()
-                    + "\n Tanggal Lahir : " + pasien.getTanggalLahir());
-            System.out.println("===============================================================");
+                    + "\n Jenis Kelamin : " + pasien.getJenisKelamin()
+                    + "\n Tanggal Lahir : " + new SimpleDateFormat("dd-MM-yyyy").format(pasien.getTanggalLahir()));
+            System.out.println("========================================================");
+            System.out.println();
         }
     }
     
