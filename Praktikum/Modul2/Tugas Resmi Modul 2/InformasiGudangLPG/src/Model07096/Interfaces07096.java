@@ -10,6 +10,6 @@ package Model07096;
  * @author LENOVO
  */
 public interface Interfaces07096 {
-     public void view();
+    public void view();
     public int cekData(String kode);
 }

@@ -10,9 +10,7 @@ package Entity07096;
  * @author LENOVO
  */
 public class NamaAdmin07096 {
-   
     private String Admin,Password;
-    
     
     public NamaAdmin07096 (String Admin, String Password){
        this.Admin = Admin;
@@ -25,9 +23,5 @@ public class NamaAdmin07096 {
 
     public String getPassword() {
         return Password;
-    }
-
-   
-  
-    
-    }
+    }    
+}

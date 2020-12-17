@@ -27,20 +27,36 @@ public class ModelBarangMasuk07096 implements Interfaces07096 {
     public void insertBarang(BarangMasuk07096 Barang ) {
         BarangMasuk07096ArrayList.add(Barang);
     }
+    
+    public void update(int index, BarangMasuk07096 barangMasuk07096) {
+        BarangMasuk07096ArrayList.set(index,(BarangMasuk07096) barangMasuk07096);
+    }
+
+    public void remove(int index) {
+        BarangMasuk07096ArrayList.remove(index);
+    }
 
     @Override
     public void view() {
-        for (BarangMasuk07096 barangmasuk07096 : BarangMasuk07096ArrayList) {
-            System.out.print(barangmasuk07096.getKode());
-            System.out.print(barangmasuk07096.getJenis());
-            System.out.print(barangmasuk07096.getHarga());
-            System.out.print(new SimpleDateFormat("dd-mm-yyyy").format(barangmasuk07096.getTanggal()));
-            System.out.println();
-
+        if(BarangMasuk07096ArrayList.isEmpty()) {
+            System.out.println("Data Barang Masuk Kosong!");
+        } else {
+            int i=0;
+            for (BarangMasuk07096 barangmasuk07096 : BarangMasuk07096ArrayList) {
+                System.out.println("\nData Barang Ke "+i);
+                System.out.println("===============================================================");
+                System.out.println(" Kode Barang : " + barangmasuk07096.getKode()
+                        + "\n Jenis Barang : " + barangmasuk07096.getJenis()
+                        + "\n Harga Barang : " + barangmasuk07096.getHarga()
+                        + "\n Tanggal Barang : " + new SimpleDateFormat("dd-MM-yyyy").format(barangmasuk07096.getTanggal())
+                        + "\n Gudang : " + barangmasuk07096.getGudang());
+                System.out.println("===============================================================");
+                i++;
+            }
         }
     }
 
-    //@Override
+    @Override
     public int cekData(String kode) {
         int loop = 0;
         for (BarangMasuk07096 barangmasuk07096 : BarangMasuk07096ArrayList) {
@@ -53,22 +69,7 @@ public class ModelBarangMasuk07096 implements Interfaces07096 {
         return loop;
     }
     
-    public BarangMasuk07096 showDataBarnag(int index){
+    public BarangMasuk07096 showDataBarang(int index){
         return BarangMasuk07096ArrayList.get(index);
     }
-
-    public void insert(BarangMasuk07096 barangMasuk07096) {
-        
-    }
-        
-
-    public void set(BarangMasuk07096 barangMasuk07096) {
-        
-    }
-       
-
-    public void remove(int index) {
-        
-    }
-
 }
