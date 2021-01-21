@@ -1,15 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Model;
 
-import Entity.DokterEntity;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-
-public class DokterModel implements Interfaces {
+import Entity.DokterEntity;
+import Entity.PoliEntity;
+public class DokterModel implements ModelInterfaces {
 
     private ArrayList<DokterEntity> DokterArrayList;
 
@@ -25,12 +20,12 @@ public class DokterModel implements Interfaces {
     public void view() {
         for (DokterEntity dokter : DokterArrayList) {
             System.out.println("========================================================");
-            System.out.println("NIK : "+dokter.getNIK());
-            System.out.println("NAMA : "+dokter.getNama());
-            System.out.println("Alamat : "+dokter.getAlamat());
-            System.out.println("Jenis Kelamin : "+dokter.getJenisKelamin());
-            System.out.println("Tanggal Lahir : "+new SimpleDateFormat("dd-MM-yyyy").format(dokter.getTanggalLahir()));
-            System.out.println("Spesialis : "+dokter.getSpesialis());
+            System.out.println("NIK : " + dokter.getNik());
+            System.out.println("NAMA : " + dokter.getNama());
+            System.out.println("No Telephone : " + dokter.getNo_telp());
+            System.out.println("Jenis Kelamin : " + dokter.getJeniskelamin());
+            System.out.println("Tanggal Lahir : " + new SimpleDateFormat("dd-MM-yyyy").format(dokter.getTgllahir()));
+            System.out.println("Alamat : " + dokter.getAlamat());
             System.out.println("========================================================");
             System.out.println();
         }
@@ -40,7 +35,7 @@ public class DokterModel implements Interfaces {
     public int cekData(int nik, String password) {
         int loop = 0;
         for (DokterEntity dokterEntity : DokterArrayList) {
-            if (dokterEntity.getNIK() == nik && dokterEntity.getPassword().equals(password)) {
+            if (dokterEntity.getNik() == nik && dokterEntity.getPassword().equals(password)) {
                 break;
             } else {
                 loop++;
@@ -53,4 +48,7 @@ public class DokterModel implements Interfaces {
         return DokterArrayList.get(index);
     }
 
+    public String showPoliDokter(int indexPoli) {
+        return PoliEntity.nama[indexPoli];
+    }
 }
