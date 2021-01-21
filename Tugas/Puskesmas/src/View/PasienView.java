@@ -29,7 +29,7 @@ public class PasienView {
     public PasienView() {
         Pasien.setSize(720, 600);
         Pasien.setLayout(null);
-        Pasien.getContentPane().setBackground(Color.cyan);
+        Pasien.getContentPane().setBackground(Color.yellow);
         titleforedit = new JLabel("Data Pasien");
         titleforedit.setFont(new Font("Times New Roman", Font.BOLD, 30));
         titleforedit.setBounds(60, 30, 200, 30);

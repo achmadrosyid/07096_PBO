@@ -6,24 +6,27 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Date;
 import javax.swing.*;
+import java.awt.event.ItemListener;
+import java.awt.event.ItemEvent;
 
 public class AllView {
 
     JFrame LogReg = new JFrame();
     JLabel login, register, title;
-    JRadioButton radiopasien, radiodokter;
     JTextField textnik, textnama, textnotelp, texttgllahir,
             textalamat, textjeniskelamin, textniklogin;
     JLabel labelniklogin, labelnama, labelnikregister, labelnotelp, labeltgllahir,
             labelalamat, labeljeniskelamin, labelpasswordlogin, labelpasswordregister;
     JButton loginUser, registerPasien;
     JPasswordField passwordlogin, passwordregister;
-    private boolean ceklogin = false;
+    private boolean ceklogin = true;
+    private String type[] = {"Dokter", "Pasien"};
+    JComboBox choiceType = new JComboBox(type);
 
     public AllView() {
         LogReg.setSize(700, 630);
         LogReg.setLayout(null);
-        LogReg.getContentPane().setBackground(Color.MAGENTA);
+        LogReg.getContentPane().setBackground(Color.GRAY);
         title = new JLabel("Selamat Datang Di Puskesmas ABCD");
         title.setBounds(100, 10, 600, 50);
         title.setFont(new Font("Times New Roman", Font.BOLD, 30));
@@ -34,15 +37,8 @@ public class AllView {
         login.setFont(new Font("Times New Roman", Font.BOLD, 30));
         LogReg.add(login);
 
-        radiopasien = new JRadioButton("Pasien");
-        radiopasien.setBounds(30, 150, 100, 30);
-        radiopasien.setBackground(Color.CYAN);
-        LogReg.add(radiopasien);
-
-        radiodokter = new JRadioButton("Dokter");
-        radiodokter.setBounds(140, 150, 100, 30);
-        radiodokter.setBackground(Color.CYAN);
-        LogReg.add(radiodokter);
+        choiceType.setBounds(30, 150, 200, 30);
+        LogReg.add(choiceType);
 
         labelniklogin = new JLabel("NIK");
         labelniklogin.setBounds(30, 180, 30, 30);
@@ -134,86 +130,89 @@ public class AllView {
         LogReg.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         LogReg.setVisible(true);
         LogReg.setLocationRelativeTo(null);
-        
-        radiodokter.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent ae) {
-                if (radiodokter.isSelected()) {
-                    radiopasien.setSelected(false);
-                    ceklogin = true;
-                }
-            }
-        });
 
-        radiopasien.addActionListener(new ActionListener() {
+        choiceType.addItemListener(new ItemListener() {
             @Override
-            public void actionPerformed(ActionEvent ae) {
-                if (radiopasien.isSelected()) {
-                    radiodokter.setSelected(false);
-                    ceklogin = false;
-                }
-            }
-        });
-
-        loginUser.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent ae) {
-                int parseNIk = Integer.parseInt(textniklogin.getText());
-                if (ceklogin == true) {
-                    try {
-                        AllObjController.dokter.dataDokter();
-                        AllObjController.dokter.login(parseNIk, passwordlogin.getText());
-                        String nama = AllObjController.dokter.dokterEntity().getNama();
-                        JOptionPane.showMessageDialog(null, 
-                                "Selamat Datang " + nama, "information", JOptionPane.INFORMATION_MESSAGE);
-                        DokterView viewDokter = new DokterView();
-                        LogReg.dispose();
-                    } catch (Exception exception) {
-                        JOptionPane.showMessageDialog(null, 
-                                "NIK atau Password Salah", "information", JOptionPane.INFORMATION_MESSAGE);
-                        kosong();
-                    }
-                } else {
-                    try {
-                        AllObjController.pasien.dataPasien();
-                        AllObjController.pasien.login(parseNIk, passwordlogin.getText());
-                        String nama = AllObjController.pasien.pasienEntity().getNama();
-                        JOptionPane.showMessageDialog(null, 
-                                "Selamat Datang " + nama, "information", JOptionPane.INFORMATION_MESSAGE);
-                        PasienView viewPasien = new PasienView();
-                        LogReg.dispose();
-                    } catch (Exception exception) {
-                        JOptionPane.showMessageDialog(null, 
-                                "NIK atau Password Salah", "information", JOptionPane.INFORMATION_MESSAGE);
-                        kosong();
+            public void itemStateChanged(ItemEvent event) {
+                JComboBox comboBox = (JComboBox) event.getSource();
+                Object item = event.getItem();
+                if (event.getStateChange() == ItemEvent.SELECTED) {
+                    if (item.toString() == "Dokter") {
+                        ceklogin = true;
+                    } else if (item.toString() == "Pasien") {
+                        ceklogin = false;
                     }
                 }
             }
-        });
+        }
+        );
 
-        registerPasien.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent ae) {
-                try {
-                    int nik = Integer.parseInt(textnik.getText());
-                    String nama = textnama.getText();
-                    String pass = passwordregister.getText();
-                    String notelp = textnotelp.getText();
-                    Date tgllahir = new Date(texttgllahir.getText());
-                    String alamat = textalamat.getText();
-                    String jeniskelamin = textjeniskelamin.getText();
-                    AllObjController.pasien.
+        loginUser.addActionListener(
+                new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent ae
+                    ) {
+                        int parseNIk = Integer.parseInt(textniklogin.getText());
+
+                        if (ceklogin) {
+                            try {
+                                AllObjController.dokter.dataDokter();
+                                AllObjController.dokter.login(parseNIk, passwordlogin.getText());
+                                String nama = AllObjController.dokter.dokterEntity().getNama();
+                                JOptionPane.showMessageDialog(null,
+                                        "Selamat Datang " + nama, "information", JOptionPane.INFORMATION_MESSAGE);
+                                DokterView viewDokter = new DokterView();
+                                LogReg.dispose();
+                            } catch (Exception exception) {
+                                JOptionPane.showMessageDialog(null,
+                                        "NIK atau Password Salah", "information", JOptionPane.INFORMATION_MESSAGE);
+                                kosong();
+                            }
+                        } else {
+                            try {
+                                AllObjController.pasien.dataPasien();
+                                AllObjController.pasien.login(parseNIk, passwordlogin.getText());
+                                String nama = AllObjController.pasien.pasienEntity().getNama();
+                                JOptionPane.showMessageDialog(null,
+                                        "Selamat Datang " + nama, "information", JOptionPane.INFORMATION_MESSAGE);
+                                PasienView viewPasien = new PasienView();
+                                LogReg.dispose();
+                            } catch (Exception exception) {
+                                JOptionPane.showMessageDialog(null,
+                                        "NIK atau Password Salah", "information", JOptionPane.INFORMATION_MESSAGE);
+                                kosong();
+                            }
+                        }
+                    }
+                }
+        );
+
+        registerPasien.addActionListener(
+                new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent ae
+                    ) {
+                        try {
+                            int nik = Integer.parseInt(textnik.getText());
+                            String nama = textnama.getText();
+                            String pass = passwordregister.getText();
+                            String notelp = textnotelp.getText();
+                            Date tgllahir = new Date(texttgllahir.getText());
+                            String alamat = textalamat.getText();
+                            String jeniskelamin = textjeniskelamin.getText();
+                            AllObjController.pasien.
                             postData(pass, nama, notelp, alamat, jeniskelamin, nik, tgllahir, "newPasien");
-                    JOptionPane.showMessageDialog(null, 
-                            "Registrasi Sukses", "information", JOptionPane.INFORMATION_MESSAGE);
-                    kosong();
-                } catch (Exception exception) {
-                    JOptionPane.showMessageDialog(null, 
-                            "Format Penulisan Salah", "Registrasi Gagal", JOptionPane.INFORMATION_MESSAGE);
-                    kosong();
+                            JOptionPane.showMessageDialog(null,
+                                    "Registrasi Sukses", "information", JOptionPane.INFORMATION_MESSAGE);
+                            kosong();
+                        } catch (Exception exception) {
+                            JOptionPane.showMessageDialog(null,
+                                    "Format Penulisan Salah", "Registrasi Gagal", JOptionPane.INFORMATION_MESSAGE);
+                            kosong();
+                        }
+                    }
                 }
-            }
-        });
+        );
     }
 
     void kosong() {

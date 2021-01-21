@@ -24,7 +24,7 @@ public class DokterView {
     public DokterView() {
         Dokter.setSize(650, 500);
         Dokter.setLayout(null);
-        Dokter.getContentPane().setBackground(Color.PINK);
+        Dokter.getContentPane().setBackground(Color.ORANGE);
         titleHeader = new JLabel("List Antrian  Poli "
                 + AllObjController.dokter.showPoliDokter(IndexPoli));
         titleHeader.setBounds(100, 30, 500, 50);
